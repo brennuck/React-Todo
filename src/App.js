@@ -2,7 +2,8 @@ import React from 'react';
 
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
-import Todo from './components/TodoComponents/Todo';
+
+import './styles.css';
 
 const data = [
   {
@@ -21,8 +22,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: data,
-      anotherOne: ''
+      data: data
     }
   }
 
@@ -37,13 +37,40 @@ class App extends React.Component {
     });
   };
 
+  toggleTodo = itemId => {
+    this.setState({
+      data: this.state.data.map(item => {
+        if (item.id === itemId) {
+          return {
+            ...item,
+            completed: !item.completed
+          };
+        } else {
+          return item;
+        }
+      })
+    })
+  }
+
+  clearTodo = () => {
+    this.setState({
+      ...this.state,
+      data: this.state.data.filter(todo => {
+        return !todo.completed
+      })
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Todo List</h1>
         <TodoForm addItem = {this.addTodo} />
-        <TodoList data = {this.state.data} />
-        <Todo data = {this.state.data} />
+        <TodoList
+        data = {this.state.data}
+        toggleTodo = {this.toggleTodo}
+        clearTodo = {this.clearTodo}
+        />
       </div>
     );
   }
