@@ -41,6 +41,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Todo List</h1>
+        <TodoForm addItem = {this.addTodo} />
+        <TodoList data = {this.state.data} />
         <Todo data = {this.state.data} />
       </div>
     );
