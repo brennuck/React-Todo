@@ -2,6 +2,7 @@ import React from 'react';
 
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
+import Todo from './components/TodoComponents/Todo';
 
 const data = [
   {
@@ -19,8 +20,9 @@ const data = [
 class App extends React.Component {
   constructor() {
     super();
-    this.setState = {
+    this.state = {
       data: data,
+      anotherOne: ''
     }
   }
 
@@ -39,8 +41,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Todo List</h1>
-        <TodoForm addTodo={this.addTodo} />
-        <TodoList data={this.state.data} />
+        <Todo data = {this.state.data} />
       </div>
     );
   }
